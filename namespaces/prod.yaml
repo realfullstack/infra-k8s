@@ -1,0 +1,39 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: realfullstack-prod
+  labels:
+    app-env: prod
+    app-project: realfullstack
+---
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: mem-limits
+  namespace: realfullstack-prod
+spec:
+  limits:
+    - default:
+        memory: 512Mi
+        cpu: "1"
+      defaultRequest:
+        memory: 256Mi
+        cpu: "0.5"
+      max:
+        memory: 6Gi
+        cpu: "4"
+      type: Container
+---
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: mem-cpu-demo
+  namespace: realfullstack-prod
+spec:
+  hard:
+    pods: "16"
+    requests.cpu: "12"
+    requests.memory: 16Gi
+    limits.cpu: "24"
+    limits.memory: 64Gi

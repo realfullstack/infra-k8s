@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: realfullstack-infra
+  labels:
+    app-env: infra
+    app-project: realfullstack

@@ -1,0 +1,30 @@
+kind: AppProject
+apiVersion: argoproj.io/v1alpha1
+metadata:
+  name: realfullstack
+  namespace: argocd
+spec:
+  clusterResourceBlacklist:
+    - group: '*'
+      kind: CiliumIdentity
+    - group: '*'
+      kind: CiliumEndpoint
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: 'argocd'
+      server: '*'
+    - namespace: 'realfullstack-dev'
+      server: '*'
+    - namespace: 'realfullstack-prod'
+      server: '*'
+    - namespace: 'realfullstack-feature'
+      server: '*'
+    - namespace: 'realfullstack-infra'
+      server: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  sourceRepos:
+    - '*'
